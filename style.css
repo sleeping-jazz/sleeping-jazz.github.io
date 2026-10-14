@@ -1,0 +1,477 @@
+/* ==========================================================
+   Portfolio styled as a VS Code window (Dark Modern colours)
+   Sections: 1 tokens, 2 base, 3 title bar, 4 activity bar,
+   5 explorer, 6 tabs + editor, 7 content, 8 status bar, 9 mobile
+   ========================================================== */
+
+/* 1. Design tokens: change a colour here and it changes everywhere */
+:root {
+    color-scheme: dark;
+
+    --bg-editor: #1f1f1f;
+    --bg-chrome: #181818;
+    --bg-hover: #2a2d2e;
+    --bg-active: #37373d;
+    --line: #2b2b2b;
+
+    --text: #cccccc;
+    --text-strong: #e8e8e8;
+    --muted: #8b8b8b;
+    --gutter: #6e7681;
+
+    --accent: #0078d4;
+    --status: #007acc;
+    --link: #3794ff;
+
+    /* syntax colours */
+    --kw: #569cd6;
+    --str: #ce9178;
+    --cmt: #6a9955;
+    --typ: #4ec9b0;
+    --var: #9cdcfe;
+
+    --ui: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, sans-serif;
+    --mono: "Cascadia Code", "Cascadia Mono", Consolas, "SF Mono", Menlo, "Liberation Mono", monospace;
+
+    /* line-number gutter geometry (smaller on phones, see section 9) */
+    --indent: 72px;
+    --num-left: -56px;
+    --num-width: 36px;
+}
+
+/* 2. Base */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; }
+
+body {
+    background: var(--bg-chrome);
+    color: var(--text);
+    font: 13px/1.4 var(--ui);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+button { font: inherit; color: inherit; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+}
+
+.ico {
+    width: 16px; height: 16px;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* File-type badges, shared by the explorer and the tabs */
+.fi {
+    display: inline-grid;
+    place-items: center;
+    width: 18px; height: 16px;
+    flex: none;
+    font: 700 9px/1 var(--mono);
+    letter-spacing: -0.04em;
+}
+.fi.md::before   { content: "M↓";  color: #519aba; }
+.fi.json::before { content: "{}";  color: #cbcb41; }
+.fi.dart::before { content: "dt";  color: #40c4ff; }
+.fi.py::before   { content: "py";  color: #ffd43b; }
+.fi.cpp::before  { content: "C+";  color: #f34b7d; }
+
+/* 3. Title bar (decoration only: no hover, no pointer cursor) */
+.vs-navbar {
+    display: flex;
+    align-items: center;
+    flex: none;
+    height: 34px;
+    padding: 0 10px;
+    background: var(--bg-chrome);
+    border-bottom: 1px solid var(--line);
+    color: #a0a0a0;
+    user-select: none;
+    cursor: default;
+}
+.tb-left, .tb-center, .tb-right { display: flex; align-items: center; }
+.tb-left   { flex: 1; gap: 14px; }
+.tb-center { flex: 1; justify-content: center; gap: 12px; }
+.tb-right  { flex: 1; justify-content: flex-end; gap: 14px; }
+.vs-navbar .logo { color: var(--accent); width: 18px; height: 18px; margin-right: 2px; }
+.long-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: min(420px, 100%);
+    height: 24px;
+    line-height: 1;
+    padding: 0 10px;
+    border: 1px solid #3c3c3c;
+    border-radius: 6px;
+    background: #202020;
+}
+.tb-right .win { width: 15px; height: 15px; }
+
+/* 4. Activity bar */
+.main { display: flex; flex: 1; min-height: 0; }
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: none;
+    width: 48px;
+    background: var(--bg-chrome);
+    border-right: 1px solid var(--line);
+}
+.act {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 48px; height: 48px;
+    color: #858585;
+    cursor: default;
+}
+.act .ico { width: 24px; height: 24px; stroke-width: 1.5; }
+.act.is-active { color: #fff; }
+.act.is-active::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 10px; bottom: 10px;
+    width: 2px;
+    background: #fff;
+}
+a.act { cursor: pointer; }
+a.act:hover { color: #fff; }
+
+/* 5. Explorer */
+.explorer {
+    display: flex;
+    flex-direction: column;
+    flex: none;
+    width: 240px;
+    overflow: auto;
+    background: var(--bg-chrome);
+    border-right: 1px solid var(--line);
+}
+.ex-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 35px;
+    padding: 0 12px 0 20px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: #bbbbbb;
+    cursor: default;
+}
+.ex-root {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 22px;
+    padding: 0 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #dddddd;
+    cursor: default;
+}
+.tree, .tree-children { list-style: none; margin: 0; padding: 0; }
+.tree { --pad: 38px; }
+.tree-children { --pad: 54px; }
+
+.tree button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    height: 24px;
+    padding: 0 8px 0 var(--pad);
+    background: none;
+    border: 0;
+    text-align: left;
+    cursor: pointer;
+}
+.tree button:hover { background: var(--bg-hover); }
+.tree button.is-active { background: var(--bg-active); color: #fff; }
+.tree button:focus-visible { outline-offset: -2px; }
+.tree .tree-folder { padding-left: 22px; gap: 4px; }
+.tree-folder .chev { width: 16px; height: 16px; }
+.tree-folder[aria-expanded="false"] .chev { transform: rotate(-90deg); }
+.tree-folder[aria-expanded="false"] + .tree-children { display: none; }
+
+/* 6. Tabs + editor frame */
+.hero {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    background: var(--bg-editor);
+}
+.tabs {
+    display: flex;
+    flex: none;
+    overflow-x: auto;
+    background: var(--bg-chrome);
+    border-bottom: 1px solid var(--line);
+    scrollbar-width: thin;
+    scrollbar-color: #424242 transparent;
+}
+.tab {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: none;
+    height: 35px;
+    padding: 0 14px 0 10px;
+    background: var(--bg-chrome);
+    border: 0;
+    border-right: 1px solid var(--line);
+    color: #9d9d9d;
+    cursor: pointer;
+}
+.tab:hover { color: #e0e0e0; }
+.tab:focus-visible { outline-offset: -2px; }
+.tab[aria-selected="true"] {
+    background: var(--bg-editor);
+    color: #fff;
+    margin-bottom: -1px;
+}
+.tab[aria-selected="true"]::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: 1px;
+    background: var(--accent);
+}
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    flex: none;
+    height: 24px;
+    padding: 0 20px;
+    color: #9d9d9d;
+    font-size: 12px;
+    white-space: pre;
+    overflow: hidden;
+}
+.editor {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    scrollbar-color: #424242 transparent;
+}
+.editor:focus-visible { outline-offset: -2px; }
+
+/* 7. Content. Every top-level block gets a line number, like an editor. */
+.section-part {
+    counter-reset: ln;
+    max-width: 920px;
+    padding: 14px 32px 90px 0;
+    font-size: 15px;
+}
+.section-part > *,
+.section-part li {
+    --lh: 26px;
+    position: relative;
+    counter-increment: ln;
+}
+.section-part > * {
+    margin: 0 0 0 var(--indent);
+    line-height: var(--lh);
+}
+.section-part > *::before,
+.section-part li::after {
+    content: counter(ln);
+    position: absolute;
+    left: var(--num-left);
+    top: 0;
+    width: var(--num-width);
+    height: var(--lh);
+    text-align: right;
+    font: 12px/var(--lh) var(--mono);
+    color: var(--gutter);
+    user-select: none;
+}
+/* lists are numbered per item, not per list */
+.section-part > ul { counter-increment: none; }
+.section-part > ul::before { content: none; }
+
+.section-part > * + * { margin-top: 14px; }
+.section-part > .code + .code { margin-top: 0; }
+
+.section-part p { max-width: 68ch; }
+
+.section-part h1 {
+    --lh: 40px;
+    margin-top: 0;
+    font: 600 26px/40px var(--mono);
+    color: #ffffff;
+    letter-spacing: -0.01em;
+}
+.section-part > h2 {
+    --lh: 30px;
+    margin-top: 30px;
+    font: 600 18px/30px var(--mono);
+    color: var(--text-strong);
+}
+.hash { color: var(--kw); font-weight: 400; }
+
+.lead { font-size: 17px; color: var(--text-strong); }
+.comment { font: 13.5px/26px var(--mono); color: var(--cmt); }
+
+a { color: var(--link); text-decoration: none; }
+a:hover, .linkbtn:hover { text-decoration: underline; }
+.linkbtn {
+    padding: 0;
+    background: none;
+    border: 0;
+    color: var(--link);
+    cursor: pointer;
+}
+
+code {
+    padding: 1px 6px;
+    background: #2a2a2a;
+    border-radius: 3px;
+    font: 13px var(--mono);
+    color: var(--str);
+}
+
+/* bullet lists, drawn like markdown */
+.md { list-style: none; padding: 0; }
+.md li { padding-left: 22px; }
+.md li + li { margin-top: 8px; }
+.md li::before {
+    content: "-";
+    position: absolute;
+    left: 4px;
+    font-family: var(--mono);
+    color: var(--kw);
+}
+
+/* project rows on the README */
+.files { list-style: none; padding: 0; }
+.files li + li { margin-top: 8px; }
+.file-link {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 14px;
+    padding: 0;
+    background: none;
+    border: 0;
+    text-align: left;
+    font-size: inherit;
+    line-height: var(--lh);
+    cursor: pointer;
+}
+.file-link .name { font-family: var(--mono); font-size: 14px; color: var(--link); }
+.file-link:hover .name { text-decoration: underline; }
+.file-link .desc { color: var(--muted); }
+
+/* link row with the primary button */
+.links {
+    --lh: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 22px;
+    line-height: 32px;
+}
+.btn {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 16px;
+    background: #0e639c;
+    border-radius: 2px;
+    color: #ffffff;
+    font-size: 13px;
+}
+.btn:hover { background: #1177bb; text-decoration: none; }
+
+/* code-looking lines (skills.json and the stack line of each project) */
+.code {
+    font: 14px/26px var(--mono);
+    white-space: pre-wrap;
+    color: var(--text);
+}
+.code .k { color: var(--var); }
+.code .s { color: var(--str); }
+.code .p { color: var(--text); }
+.code .kw { color: var(--kw); }
+.code .v { color: var(--var); }
+.code .t { color: var(--typ); }
+
+/* the one animation: a blinking caret after my name */
+.caret {
+    display: inline-block;
+    width: 2px; height: 0.9em;
+    margin-left: 4px;
+    background: #aeafad;
+    vertical-align: -0.1em;
+}
+@media (prefers-reduced-motion: no-preference) {
+    .caret { animation: blink 1.1s steps(1) infinite; }
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* 8. Status bar (decoration only) */
+.statusbar {
+    display: flex;
+    justify-content: space-between;
+    flex: none;
+    height: 22px;
+    background: var(--status);
+    color: #ffffff;
+    font-size: 12px;
+    user-select: none;
+    cursor: default;
+}
+.sb-group { display: flex; }
+.sb-item { display: flex; align-items: center; gap: 4px; padding: 0 8px; }
+.sb-item .ico { width: 14px; height: 14px; }
+
+/* 9. Phones and narrow windows: the tabs become the navigation */
+@media (max-width: 860px) {
+    :root {
+        --indent: 46px;
+        --num-left: -38px;
+        --num-width: 26px;
+    }
+    .sidebar, .explorer { display: none; }
+
+    .tb-left span, .tb-right, .tb-center .ico { display: none; }
+    .tb-left { flex: none; }
+    .tb-center { flex: 1; }
+    .tb-center .long-bar { width: 100%; }
+    .tb-center { padding-right: 24px; }
+
+    .section-part { padding-right: 18px; }
+    .section-part > *::before,
+    .section-part li::after { font-size: 11px; }
+    .section-part h1 { --lh: 32px; font: 600 22px/32px var(--mono); }
+    .section-part > h2 { --lh: 28px; font-size: 17px; line-height: 28px; }
+    .sb-hide { display: none; }
+}

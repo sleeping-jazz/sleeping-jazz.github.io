@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaswanth Ram Mattaparthi | Portfolio</title>
+    <meta name="description" content="Portfolio of Jaswanth Ram Mattaparthi, computer science undergraduate at SSCBS, University of Delhi: a Flutter SOS app, a local-LLM Gmail assistant and a C++ music player.">
+    <meta name="theme-color" content="#181818">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230078d4' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 7l-5 5 5 5M16 7l5 5-5 5M14 5l-4 14'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+    <noscript><style>.section-part[hidden]{display:block}</style></noscript>
+</head>
+<body>
+
+<!-- Icon sprite: every icon on the page is drawn from here with <use href="#i-name"> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-logo" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 5l-4 14"/></symbol>
+    <symbol id="i-files" viewBox="0 0 24 24"><path d="M9 3h6l4 4v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M15 3v4h4"/><path d="M5 8v11a2 2 0 0 0 2 2h8"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l6 6"/></symbol>
+    <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="9" r="2"/><path d="M6 7v10M18 11c0 4-5 5-10 7"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><rect x="3" y="12" width="8" height="8" rx="1"/><rect x="12" y="12" width="8" height="8" rx="1"/><rect x="3" y="3" width="8" height="8" rx="1"/><path d="M17 2l5 5-5 5-5-5z"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+    <symbol id="i-fwd" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-layout-l" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></symbol>
+    <symbol id="i-layout-b" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 14h18"/></symbol>
+    <symbol id="i-layout-r" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></symbol>
+    <symbol id="i-min" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-max" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-err" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9 9l6 6M15 9l-6 6"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17v.5"/></symbol>
+</svg>
+
+<div class="app">
+
+    <!-- Title bar. Decoration only: no hover, no pointer, no focus. -->
+    <header class="vs-navbar" aria-hidden="true">
+        <div class="tb-left">
+            <svg class="ico logo"><use href="#i-logo"/></svg>
+            <span>File</span>
+            <span>Edit</span>
+            <span>Selection</span>
+            <span>View</span>
+            <span>Go</span>
+            <span>Run</span>
+            <span>Terminal</span>
+            <span>Help</span>
+        </div>
+        <div class="tb-center">
+            <svg class="ico"><use href="#i-back"/></svg>
+            <svg class="ico"><use href="#i-fwd"/></svg>
+            <div class="long-bar">
+                <svg class="ico"><use href="#i-search"/></svg>
+                Jaswanth Ram Mattaparthi
+            </div>
+        </div>
+        <div class="tb-right">
+            <svg class="ico"><use href="#i-layout-l"/></svg>
+            <svg class="ico"><use href="#i-layout-b"/></svg>
+            <svg class="ico"><use href="#i-layout-r"/></svg>
+            <svg class="ico win"><use href="#i-min"/></svg>
+            <svg class="ico win"><use href="#i-max"/></svg>
+            <svg class="ico win"><use href="#i-close"/></svg>
+        </div>
+    </header>
+
+    <div class="main">
+
+        <!-- Activity bar. Only the source-control icon does anything: it opens my GitHub. -->
+        <aside class="sidebar">
+            <div class="act is-active" aria-hidden="true"><svg class="ico"><use href="#i-files"/></svg></div>
+            <div class="act" aria-hidden="true"><svg class="ico"><use href="#i-search"/></svg></div>
+            <a class="act" href="https://github.com/sleeping-jazz" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile (opens in a new tab)" title="GitHub"><svg class="ico"><use href="#i-branch"/></svg></a>
+            <div class="act" aria-hidden="true"><svg class="ico"><use href="#i-play"/></svg></div>
+            <div class="act" aria-hidden="true"><svg class="ico"><use href="#i-ext"/></svg></div>
+        </aside>
+
+        <!-- File explorer: every file here opens the matching tab. -->
+        <aside class="explorer" aria-label="File explorer">
+            <div class="ex-title">
+                <span>EXPLORER</span>
+                <svg class="ico" aria-hidden="true"><use href="#i-more"/></svg>
+            </div>
+            <div class="ex-root">
+                <svg class="ico" aria-hidden="true"><use href="#i-chev"/></svg>
+                <span>PORTFOLIO</span>
+            </div>
+            <ul class="tree">
+                <li><button class="tree-file" data-open="readme"><span class="fi md" aria-hidden="true"></span>README.md</button></li>
+                <li><button class="tree-file" data-open="skills"><span class="fi json" aria-hidden="true"></span>skills.json</button></li>
+                <li>
+                    <button class="tree-folder" aria-expanded="true">
+                        <svg class="ico chev" aria-hidden="true"><use href="#i-chev"/></svg>projects
+                    </button>
+                    <ul class="tree-children">
+                        <li><button class="tree-file" data-open="sos"><span class="fi dart" aria-hidden="true"></span>sos_app.dart</button></li>
+                        <li><button class="tree-file" data-open="gmail"><span class="fi py" aria-hidden="true"></span>gmail_assistant.py</button></li>
+                        <li><button class="tree-file" data-open="music"><span class="fi cpp" aria-hidden="true"></span>music_player.cpp</button></li>
+                    </ul>
+                </li>
+                <li><button class="tree-file" data-open="experience"><span class="fi md" aria-hidden="true"></span>experience.md</button></li>
+                <li><button class="tree-file" data-open="leadership"><span class="fi md" aria-hidden="true"></span>leadership.md</button></li>
+                <li><button class="tree-file" data-open="achievements"><span class="fi md" aria-hidden="true"></span>achievements.md</button></li>
+                <li><button class="tree-file" data-open="contact"><span class="fi md" aria-hidden="true"></span>contact.md</button></li>
+            </ul>
+        </aside>
+
+        <main class="hero">
+            <div class="tabs" role="tablist" aria-label="Open files">
+                <button class="tab" role="tab" id="tab-readme" aria-controls="file-readme" aria-selected="true" data-open="readme"><span class="fi md" aria-hidden="true"></span>README.md</button>
+                <button class="tab" role="tab" id="tab-skills" aria-controls="file-skills" aria-selected="false" tabindex="-1" data-open="skills"><span class="fi json" aria-hidden="true"></span>skills.json</button>
+                <button class="tab" role="tab" id="tab-sos" aria-controls="file-sos" aria-selected="false" tabindex="-1" data-open="sos"><span class="fi dart" aria-hidden="true"></span>sos_app.dart</button>
+                <button class="tab" role="tab" id="tab-gmail" aria-controls="file-gmail" aria-selected="false" tabindex="-1" data-open="gmail"><span class="fi py" aria-hidden="true"></span>gmail_assistant.py</button>
+                <button class="tab" role="tab" id="tab-music" aria-controls="file-music" aria-selected="false" tabindex="-1" data-open="music"><span class="fi cpp" aria-hidden="true"></span>music_player.cpp</button>
+                <button class="tab" role="tab" id="tab-experience" aria-controls="file-experience" aria-selected="false" tabindex="-1" data-open="experience"><span class="fi md" aria-hidden="true"></span>experience.md</button>
+                <button class="tab" role="tab" id="tab-leadership" aria-controls="file-leadership" aria-selected="false" tabindex="-1" data-open="leadership"><span class="fi md" aria-hidden="true"></span>leadership.md</button>
+                <button class="tab" role="tab" id="tab-achievements" aria-controls="file-achievements" aria-selected="false" tabindex="-1" data-open="achievements"><span class="fi md" aria-hidden="true"></span>achievements.md</button>
+                <button class="tab" role="tab" id="tab-contact" aria-controls="file-contact" aria-selected="false" tabindex="-1" data-open="contact"><span class="fi md" aria-hidden="true"></span>contact.md</button>
+            </div>
+
+            <div class="breadcrumb" id="crumb" aria-hidden="true">portfolio  ›  README.md</div>
+
+            <div class="editor" tabindex="0" aria-label="File contents">
+
+                <!-- README.md -->
+                <article class="section-part" id="file-readme" role="tabpanel" aria-labelledby="tab-readme">
+                    <h1><span class="hash" aria-hidden="true"># </span>Jaswanth Ram Mattaparthi<span class="caret" aria-hidden="true"></span></h1>
+                    <p class="lead">Computer science undergraduate at SSCBS, University of Delhi.</p>
+                    <p>I build software that does something useful: an offline SOS app for Android, an email assistant that runs a language model on my own machine, and a C++ music player built on a linked list I wrote myself. I'm interested in technology-driven solutions for social impact and sustainability.</p>
+                    <div class="links">
+                        <a class="btn" href="Jaswanth_Ram_Mattaparthi_Resume.pdf" download>Download resume</a>
+                        <a href="https://github.com/sleeping-jazz" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a href="https://www.linkedin.com/in/jaswanth1502" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        <a href="mailto:jashu152007@gmail.com">jashu152007@gmail.com</a>
+                    </div>
+                    <h2><span class="hash" aria-hidden="true">## </span>Projects</h2>
+                    <ul class="files">
+                        <li><button class="file-link" data-open="sos"><span class="name">sos_app.dart</span><span class="desc">Sends your live location by SMS to saved contacts and a helpline with one tap. Works offline.</span></button></li>
+                        <li><button class="file-link" data-open="gmail"><span class="name">gmail_assistant.py</span><span class="desc">Drafts replies to unread Gmail with a local Llama 3.2 model. You confirm every draft.</span></button></li>
+                        <li><button class="file-link" data-open="music"><span class="name">music_player.cpp</span><span class="desc">Console player with real audio, built on a circular doubly linked list.</span></button></li>
+                    </ul>
+                    <h2><span class="hash" aria-hidden="true">## </span>Skills</h2>
+                    <p>Python, C++ and Dart, with Flutter for mobile apps. The full list is in <button class="linkbtn" data-open="skills">skills.json</button>.</p>
+                    <h2><span class="hash" aria-hidden="true">## </span>Education</h2>
+                    <p>B.Sc. (Hons.) Computer Science, Shaheed Sukhdev College of Business Studies, University of Delhi. CGPA 8.00 after the first year.</p>
+                </article>
+
+                <!-- skills.json -->
+                <article class="section-part" id="file-skills" role="tabpanel" aria-labelledby="tab-skills" hidden>
+                    <h1 class="sr-only">skills.json</h1>
+                    <div class="code"><span class="p">{</span></div>
+                    <div class="code">  <span class="k">"languages"</span><span class="p">: [</span><span class="s">"Python"</span><span class="p">, </span><span class="s">"C++"</span><span class="p">, </span><span class="s">"Dart"</span><span class="p">],</span></div>
+                    <div class="code">  <span class="k">"frameworks"</span><span class="p">: [</span><span class="s">"Flutter"</span><span class="p">],</span></div>
+                    <div class="code">  <span class="k">"tools"</span><span class="p">: [</span><span class="s">"SQLite"</span><span class="p">, </span><span class="s">"Ollama"</span><span class="p">, </span><span class="s">"Canva"</span><span class="p">],</span></div>
+                    <div class="code">  <span class="k">"interests"</span><span class="p">: [</span><span class="s">"technology for social impact"</span><span class="p">, </span><span class="s">"sustainability"</span><span class="p">],</span></div>
+                    <div class="code">  <span class="k">"learning"</span><span class="p">: [</span><span class="s">"JavaScript"</span><span class="p">, </span><span class="s">"React"</span><span class="p">]</span></div>
+                    <div class="code"><span class="p">}</span></div>
+                </article>
+
+                <!-- projects/sos_app.dart -->
+                <article class="section-part" id="file-sos" role="tabpanel" aria-labelledby="tab-sos" hidden>
+                    <h1><span class="hash" aria-hidden="true"># </span>SOS Emergency Alert App</h1>
+                    <div class="code"><span class="kw">final</span> <span class="v">stack</span> = [<span class="s">'Flutter'</span>, <span class="s">'Dart'</span>, <span class="s">'Geolocation API'</span>,</div>
+                    <div class="code">    <span class="s">'SharedPreferences'</span>, <span class="s">'Android SMS'</span>];</div>
+                    <h2><span class="hash" aria-hidden="true">## </span>What it does</h2>
+                    <p>One tap fetches the phone's live GPS position and texts it, as a Google Maps link, to up to three saved contacts and a helpline number. It needs no internet connection and no account: it uses only the device's GPS and the native SMS service.</p>
+                    <h2><span class="hash" aria-hidden="true">## </span>Highlights</h2>
+                    <ul class="md">
+                        <li>Contacts and the helpline number are stored on the device with SharedPreferences, so there is no backend to run.</li>
+                        <li>On dual-SIM phones the alert goes out through every active SIM, which improves the odds that it gets delivered.</li>
+                        <li>Handles runtime permissions for SMS, phone and location, including the case where the user denies them.</li>
+                        <li>Tested end to end on a physical Android device and built as a release APK.</li>
+                    </ul>
+                    <h2><span class="hash" aria-hidden="true">## </span>Challenges</h2>
+                    <ul class="md">
+                        <li>Android emulators don't run on my ARM-based laptop, so all development and debugging happened on a physical phone.</li>
+                        <li>Flutter and Dart were both new to me, so the first stretch was a steep learning curve.</li>
+                        <li>Deciding how to fall back between SIMs when one has no balance or a weak signal while the other works.</li>
+                    </ul>
+                    <h2><span class="hash" aria-hidden="true">## </span>Source</h2>
+                    <p><a href="https://github.com/sleeping-jazz/SOS-Emergency-Alert-App" target="_blank" rel="noopener noreferrer">github.com/sleeping-jazz/SOS-Emergency-Alert-App</a></p>
+                </article>
+
+                <!-- projects/gmail_assistant.py -->
+                <article class="section-part" id="file-gmail" role="tabpanel" aria-labelledby="tab-gmail" hidden>
+                    <h1><span class="hash" aria-hidden="true"># </span>Gmail AI Draft Assistant</h1>
+                    <div class="code"><span class="v">stack</span> = [<span class="s">"Python"</span>, <span class="s">"Gmail API"</span>, <span class="s">"OAuth 2.0"</span>,</div>
+                    <div class="code">         <span class="s">"Ollama (Llama 3.2:3B)"</span>, <span class="s">"SQLite"</span>]</div>
+                    <h2><span class="hash" aria-hidden="true">## </span>What it does</h2>
+                    <p>Reads unread Gmail messages, decides which ones need a reply, and saves a draft written by a language model running locally through Ollama. It never sends mail itself: you read each generated reply and confirm it before it is saved as a Gmail draft.</p>
+                    <h2><span class="hash" aria-hidden="true">## </span>Highlights</h2>
+                    <ul class="md">
+                        <li>Google OAuth 2.0 sign-in with a reusable local token.</li>
+                        <li>A SQLite table records every processed message, so an email is never classified or drafted twice across runs.</li>
+                        <li>Llama 3.2:3B runs locally via Ollama: no paid AI API, and email text isn't sent to a third-party AI service.</li>
+                        <li>Split into separate modules for authentication, email retrieval, AI classification and drafting, the database, and draft creation.</li>
+                    </ul>
+                    <h2><span class="hash" aria-hidden="true">## </span>Challenges</h2>
+                    <ul class="md">
+                        <li>The <code>cryptography</code> package failed to build while installing the Google auth libraries. Moving to Python 3.12, which has pre-built wheels for it, fixed that.</li>
+                        <li>For tracking processed mail I weighed simply marking emails as read against a SQLite table, and chose the database for more reliable, detailed tracking.</li>
+                        <li>The small local model sometimes misjudges whether a reply is needed. Occasionally, after you confirm, it copies the original email into the draft instead of writing a reply. This is a known limitation.</li>
+                        <li>Google Cloud Console (the OAuth consent screen and credentials) was new to me and took time to learn.</li>
+                        <li>Only plain-text emails are handled so far. HTML email support is planned.</li>
+                    </ul>
+                    <h2><span class="hash" aria-hidden="true">## </span>Source</h2>
+                    <p><a href="https://github.com/sleeping-jazz/Gmail-AI-Draft-Assistant" target="_blank" rel="noopener noreferrer">github.com/sleeping-jazz/Gmail-AI-Draft-Assistant</a></p>
+                </article>
+
+                <!-- projects/music_player.cpp -->
+                <article class="section-part" id="file-music" role="tabpanel" aria-labelledby="tab-music" hidden>
+                    <h1><span class="hash" aria-hidden="true"># </span>Digital Music Player</h1>
+                    <div class="code"><span class="kw">const</span> <span class="t">std::vector</span>&lt;<span class="t">std::string</span>&gt; <span class="v">stack</span> =</div>
+                    <div class="code">    {<span class="s">"C++17"</span>, <span class="s">"Windows MCI API"</span>, <span class="s">"winmm"</span>};</div>
+                    <h2><span class="hash" aria-hidden="true">## </span>What it does</h2>
+                    <p>A console music player in C++ that plays real MP3 and WAV files through the Windows MCI API. The playlist is a circular doubly linked list that I wrote myself, so next and previous wrap around without any boundary checks.</p>
+                    <h2><span class="hash" aria-hidden="true">## </span>Highlights</h2>
+                    <ul class="md">
+                        <li>Inserting, deleting and moving to the next or previous track are all O(1), using a cursor into the list.</li>
+                        <li>Import a single file or a whole folder, then shuffle (O(n), since every node is touched) or repeat the current track.</li>
+                        <li>Three separate parts: the <code>Playlist</code> class holds the data structure, the <code>Player</code> class wraps MCI playback, and <code>MusicPlayer.cpp</code> is the console UI that connects them.</li>
+                    </ul>
+                    <h2><span class="hash" aria-hidden="true">## </span>Challenges</h2>
+                    <ul class="md">
+                        <li>Importing more than one file at a time broke next-song navigation, which meant debugging the playlist's insertion and cursor logic.</li>
+                        <li>Detecting when a track has finished, so the next one starts on its own, was hard to make reliable.</li>
+                        <li>Folder import: scanning subfolders adds overhead, while importing only the chosen folder is simpler but repetitive for nested libraries. I chose the simpler, non-recursive version.</li>
+                        <li>Known limitations: file names in non-English scripts (for example Hindi or Hawaiian) don't import correctly yet, it runs on Windows only because it uses MCI, and playlists aren't saved between sessions.</li>
+                    </ul>
+                    <h2><span class="hash" aria-hidden="true">## </span>Source</h2>
+                    <p><a href="https://github.com/sleeping-jazz/Music-Player" target="_blank" rel="noopener noreferrer">github.com/sleeping-jazz/Music-Player</a></p>
+                </article>
+
+                <!-- experience.md -->
+                <article class="section-part" id="file-experience" role="tabpanel" aria-labelledby="tab-experience" hidden>
+                    <h1><span class="hash" aria-hidden="true"># </span>Experience</h1>
+                    <h2><span class="hash" aria-hidden="true">## </span>Havish M Consulting, Live Project Associate</h2>
+                    <p class="comment">&lt;!-- 12 weeks, Nov – Jan 2025 --&gt;</p>
+                    <p>Developed an end-to-end machine learning solution for employee attrition analysis: preprocessing, model training (Logistic Regression, Decision Tree, Random Forest), evaluation, and extraction of the key factors behind retention.</p>
+                    <h2><span class="hash" aria-hidden="true">## </span>InAmigos Foundation, Graphic Designer</h2>
+                    <p class="comment">&lt;!-- 2 weeks, April 2025 --&gt;</p>
+                    <p>Designed and promoted campaign creatives in Canva for Project Bachpanshala, supporting donations, volunteer recruitment and CSR partnerships. Worked with the marketing, content and development teams on campaign execution.</p>
+                    <h2><span class="hash" aria-hidden="true">## </span>Uttejana Foundation, Live Project Associate</h2>
+                    <p class="comment">&lt;!-- 8 weeks, Feb – March 2025. Social impact and community development --&gt;</p>
+                    <p>Made frequent field visits to work directly with beneficiaries, collected qualitative feedback to judge how well initiatives were working, and turned those observations into strategic reports for programs in education and menstrual health.</p>
+                </article>
+
+                <!-- leadership.md -->
+                <article class="section-part" id="file-leadership" role="tabpanel" aria-labelledby="tab-leadership" hidden>
+                    <h1><span class="hash" aria-hidden="true"># </span>Leadership</h1>
+                    <h2><span class="hash" aria-hidden="true">## </span>GirlUp Ruhi, SSCBS: Core Committee Member</h2>
+                    <p class="comment">&lt;!-- Sept 2025 – Present --&gt;</p>
+                    <ul class="md">
+                        <li>Initiated a campus sustainability initiative: 2 UPI-enabled sanitary napkin vending machines and 16 disposal bins, funded by ₹56K of CSR support from KEI Industries Ltd.</li>
+                        <li>Contributed to a Psychological First Aid webinar on mindfulness and suicide prevention awareness, with 100+ participants, run with Manovritta and 5+ Girl Up chapters.</li>
+                        <li>Led Project S.A.K.H.I NGO outreach with Uttejana Foundation and Girl Up Udaan, engaging 60+ underprivileged children on Daughters' Day to promote gender equality.</li>
+                    </ul>
+                    <h2><span class="hash" aria-hidden="true">## </span>ACM, SSCBS: Organising Committee Member</h2>
+                    <p class="comment">&lt;!-- Sept 2025 – July 2026 --&gt;</p>
+                    <ul class="md">
+                        <li>Designed banners, posters, pitch decks and digital content for the SAH Hackathon as part of the Graphics &amp; Marketing Team.</li>
+                        <li>Assisted with ACM SSCBS-DDUC Industry Day, supporting speaker coordination and event management.</li>
+                    </ul>
+                    <h2><span class="hash" aria-hidden="true">## </span>EcoClub, SSCBS: Organising Committee Member</h2>
+                    <p class="comment">&lt;!-- Sept 2025 – May 2026 --&gt;</p>
+                    <ul class="md">
+                        <li>Coordinated large-scale waste segregation awareness activities, educating 100+ participants through games and workshops.</li>
+                        <li>Led an online guest-speaker session on waste management and sustainability with 60+ participants, in collaboration with the Rotaract Club of Delhi of University South Campus.</li>
+                        <li>Took part in a field study of the Yamuna River: analysed water quality indicators, gathered insights from nearby communities, and helped draft an environmental assessment report.</li>
+                    </ul>
+                </article>
+
+                <!-- achievements.md -->
+                <article class="section-part" id="file-achievements" role="tabpanel" aria-labelledby="tab-achievements" hidden>
+                    <h1><span class="hash" aria-hidden="true"># </span>Achievements</h1>
+                    <ul class="md">
+                        <li>Certificate of Merit, IIT AI/ML Hackathon (Convolve 4.0), 2026.</li>
+                        <li>Certificate of Appreciation for the graphic design internship at InAmigos Foundation, 2025.</li>
+                        <li>100/100 in Informatics Practices, AISSCE, 2025.</li>
+                        <li>Rank 1, SOF National Cyber Olympiad, 2022.</li>
+                        <li>Rank 3, SOF National Science Olympiad, 2022.</li>
+                        <li>Rank 5, SOF International English Olympiad, 2022.</li>
+                        <li>NCC 'A' Certificate, National Cadet Corps (Ministry of Defence, Government of India), 2022.</li>
+                        <li>International winner, BRICSMATH.com online mathematics competition, 2019.</li>
+                    </ul>
+                </article>
+
+                <!-- contact.md -->
+                <article class="section-part" id="file-contact" role="tabpanel" aria-labelledby="tab-contact" hidden>
+                    <h1><span class="hash" aria-hidden="true"># </span>Contact</h1>
+                    <p>Email is the fastest way to reach me. I'm glad to talk about internships, my projects, or how any of this was built.</p>
+                    <ul class="md">
+                        <li>Email: <a href="mailto:jashu152007@gmail.com">jashu152007@gmail.com</a></li>
+                        <li>LinkedIn: <a href="https://www.linkedin.com/in/jaswanth1502" target="_blank" rel="noopener noreferrer">linkedin.com/in/jaswanth1502</a></li>
+                        <li>GitHub: <a href="https://github.com/sleeping-jazz" target="_blank" rel="noopener noreferrer">github.com/sleeping-jazz</a></li>
+                    </ul>
+                    <div class="links">
+                        <a class="btn" href="Jaswanth_Ram_Mattaparthi_Resume.pdf" download>Download resume</a>
+                    </div>
+                </article>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Status bar. Decoration only; the language label follows the open file. -->
+    <footer class="statusbar" aria-hidden="true">
+        <div class="sb-group">
+            <span class="sb-item"><svg class="ico"><use href="#i-branch"/></svg>main</span>
+            <span class="sb-item sb-hide"><svg class="ico"><use href="#i-err"/></svg>0</span>
+            <span class="sb-item sb-hide"><svg class="ico"><use href="#i-warn"/></svg>0</span>
+        </div>
+        <div class="sb-group">
+            <span class="sb-item sb-hide">Ln 1, Col 1</span>
+            <span class="sb-item sb-hide">UTF-8</span>
+            <span class="sb-item" id="sb-lang">Markdown</span>
+        </div>
+    </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
